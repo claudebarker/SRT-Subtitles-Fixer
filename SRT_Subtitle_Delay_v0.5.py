@@ -78,13 +78,14 @@ def modifyLine(line, offset, beginDelayEffect):
 	return start + " --> " + end + "\n"
 	
 def main():
-	parser = argparse.ArgumentParser(description="------------------------------------------------------------------------------\n \
-												  -------------------------- SRT Subtitle Delay v0.5 ---------------------------\n \
-												  ------------------------------------------------------------------------------\n \
-												  -- Alter the timing of an SRT subtitle file. ---------------------------------\n \
-												  -- Example: subtitleFixer.py C:\\Input.srt C:\\Output.srt \n\
-												  00:00:05,000 -5000 \
-												  ------------------------------------------------------------------------------")
+	parser = argparse.ArgumentParser(description="\
+	------------------------------------------------------------------------------\n \
+	 -------------------------- SRT Subtitle Delay v0.5 ---------------------------\n \
+	------------------------------------------------------------------------------\n \
+	 -- Alter the timing of an SRT subtitle file. ---------------------------------\n \
+	 -- Example: subtitleFixer.py C:\\Input.srt C:\\Output.srt \n\
+	00:00:05,000 -5000 \
+	------------------------------------------------------------------------------")
 	parser.add_argument('inputPath', metavar='inputPath', default=None, help='Input file path')
 	parser.add_argument('outputPath', metavar='outputPath', default=None, help='Output file path')
 	parser.add_argument('beginDelayEffect', default='00:00:00,000', help='When to begin applying the offset to the srt timecodes. Default is 00:00:00,000')
