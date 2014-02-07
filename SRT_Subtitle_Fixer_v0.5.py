@@ -1,6 +1,6 @@
 """ 
 Version 0.5
-Written in python 2.7 by Gooby
+Written in python 2.7.6 by Megalon
 
 This is a simple command line program to delay or speed up the timing of a ".srt" subtitle file.
 It reads all of the lines of the SRT file as a text document, parses the SRT timecode data, and applies
@@ -80,7 +80,7 @@ def modifyLine(line, offset, beginDelayEffect):
 def main():
 	parser = argparse.ArgumentParser(description="\
 	------------------------------------------------------------------------------\n \
-	 -------------------------- SRT Subtitle Delay v0.5 ---------------------------\n \
+	 -------------------------- SRT Subtitle Fixer v0.5 ---------------------------\n \
 	------------------------------------------------------------------------------\n \
 	 -- Alter the timing of an SRT subtitle file. ---------------------------------\n \
 	 -- Example: subtitleFixer.py C:\\Input.srt C:\\Output.srt \n\
@@ -90,7 +90,7 @@ def main():
 	parser.add_argument('outputPath', metavar='outputPath', default=None, help='Output file path')
 	parser.add_argument('beginDelayEffect', default='00:00:00,000', help='When to begin applying the offset to the srt timecodes. Default is 00:00:00,000')
 	parser.add_argument('offsetInput', help='How much, in milliseconds, to offset the timing in the srt file. Positive, or negative.')
-	parser.add_argument('-v', '--verbose', action='store_true', help='Verbose')
+	parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output. Prints every change in SRT timecode.')
 	args = parser.parse_args()
 	inputPath = args.inputPath
 	outputPath = args.outputPath
@@ -112,6 +112,7 @@ def main():
 			if line[2] == ':' and line[5] == ':' and line[8] == ',':
 				# Call the method to modify this line to the new time, then write to the output file
 				modifiedLine = modifyLine(line, offset, beginDelayEffect)
+				# Check for the verbose option
 				if args.verbose:
 					print "Changing " + line + " to      " + modifiedLine
 				output.write(modifiedLine)
