@@ -8,5 +8,7 @@ It reads all of the lines of the SRT file as a text document, parses the SRT tim
 an offset (positive or negative delay) to the timing of every subtitle.
 
 Options include:
+
 -i Insert a new subtitle at any given time in 00:00:00,000 format.
+
 -v Verbose output. Shows every change made to the original timing.
