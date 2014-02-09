@@ -1,5 +1,5 @@
 """ 
-Version 0.6.0
+Version 0.6.1
 Written in python 2.7.6 by Megalon
 
 This is a simple command line program to delay or speed up the timing of a ".srt" subtitle file.
@@ -7,8 +7,9 @@ It reads all of the lines of the SRT file as a text document, parses the SRT tim
 an offset (positive or negative delay) to the timing of every subtitle.
 
 Options include:
-	-i Insert a new subtitle at any given time in 00:00:00,000 format.
 	-v Verbose output. Shows every change made to the original timing.
+	-s Start time. When to begin applying the offset to the srt timecodes. Default is 00:00:00,000
+	-i Insert a new subtitle at any given time in 00:00:00,000 format.
 """
 
 import argparse
@@ -76,16 +77,17 @@ def splitLine(line):
 def main():
 	parser = argparse.ArgumentParser(description="\
 	------------------------------------------------------------------------------\n \
-	------------------------- SRT Subtitle Fixer v0.6.0 --------------------------\n \
+	------------------------- SRT Subtitle Fixer v0.6.1 --------------------------\n \
 	------------------------------------------------------------------------------\n \
-	Example: SRT_Subtitle_Fixer.py C:\\Input.srt C:\\Output.srt \n\
-	00:00:05,000 -5000 \
+	-- Example: ------------------------------------------------------------------\n\
+	SRT_Subtitle_Fixer.py C:\\Input.srt C:\\Output.srt \n\
+	-5000 -s 00:05:00,000 \
 	------------------------------------------------------------------------------")
 	parser.add_argument('inputPath', metavar='inputPath', default=None, help='Input file path')
 	parser.add_argument('outputPath', metavar='outputPath', default=None, help='Output file path')
-	parser.add_argument('startTime', default='00:00:00,000', help='When to begin applying the offset to the srt timecodes. Default is 00:00:00,000')
 	parser.add_argument('delayTime', help='How much time, in milliseconds, to offset the timing in the srt file. Positive, or negative.')
 	parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output. Prints every change in SRT timecode.')
+	parser.add_argument('-s', '--startTime', action='store', default='00:00:00,000', help='When to begin applying the offset to the srt timecodes. Default is 00:00:00,000')
 	parser.add_argument('-i', '--insert', action='store', help='Insert a blank subtitle at specified time in 00:00:00,000 format.')
 	args = parser.parse_args()
 	inputPath = args.inputPath
@@ -111,7 +113,7 @@ def main():
 	previousTime = 0
 	
 	for line in input:
-		# If the line has a subtitle number, increate the subtitle count, and print it to the file.
+		# If the line has a subtitle number, increase the subtitle count, and print it to the file.
 		if nextCount == True:
 			subtitlesCount = subtitlesCount + 1
 			output.write(str(subtitlesCount) + "\n")
