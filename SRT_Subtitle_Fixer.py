@@ -80,8 +80,7 @@ def main():
 	------------------------- SRT Subtitle Fixer v0.6.1 --------------------------\n \
 	------------------------------------------------------------------------------\n \
 	-- Example: ------------------------------------------------------------------\n\
-	SRT_Subtitle_Fixer.py C:\\Input.srt C:\\Output.srt \n\
-	-5000 -s 00:05:00,000 \
+	SRT_Subtitle_Fixer.py C:\\Input.srt C:\\Output.srt -5000 -s 00:05:00,000 \n\
 	------------------------------------------------------------------------------")
 	parser.add_argument('inputPath', metavar='inputPath', default=None, help='Input file path')
 	parser.add_argument('outputPath', metavar='outputPath', default=None, help='Output file path')
