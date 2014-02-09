@@ -97,6 +97,7 @@ def main():
 	startTime = args.startTime
 	offset = int(args.delayTime)
 	
+	# The startTime can also be entered as 0, so the user does not have to enter 00:00:00,000 each time
 	if startTime == '0':
 		startTime = '00:00:00,000'
 	
@@ -105,22 +106,36 @@ def main():
 	input = open(inputPath, 'r')
 	output = open(outputPath, 'w')
 	
+	# Variable that holds the number of subtitles in the document.
+	subtitlesCount = -1
+	# Boolean that tells if the next line is a counting line that tells the subtitle number.
+	nextCount = True
+	
 	for line in input:
+		if nextCount == True:
+			subtitlesCount = subtitlesCount + 1
+			output.write(str(subtitlesCount) + "\n")
+			nextCount = False
 		# Check if the line is a timing line. 00:00:00,000 If not, simply write the line to the output file.
 		# 30 characters is the lenght of the timing lines
-		if len(line) == 30:
+		elif len(line) == 30:
 			if line[2] == ':' and line[5] == ':' and line[8] == ',':
 				# Call the method to modify this line to the new time, then write to the output file
 				modifiedLine = modifyLine(line, offset, startTime)
 				# Check for the verbose option
 				if args.verbose:
+					print subtitlesCount
 					print "Changing " + line + " to      " + modifiedLine
 				output.write(modifiedLine)
 			else:
 				output.write(line)
+		elif line == "\n":
+			nextCount = True
+			output.write(line)
 		else:
 			output.write(line)
 	print "Done!"
+	print "Delayed subtitles " + inputPath + " by " + str(offset) + " milliseconds, starting at " + startTime + " and wrote to file " + outputPath + "!"
 		
 if __name__ == "__main__":
 	main()
