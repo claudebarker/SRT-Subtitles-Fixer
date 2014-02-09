@@ -1,5 +1,5 @@
 """ 
-Version 0.5
+Version 0.5.1
 Written in python 2.7.6 by Megalon
 
 This is a simple command line program to delay or speed up the timing of a ".srt" subtitle file.
@@ -56,23 +56,23 @@ def convertToSRTTimeCode(time):
 	return fixedString
 
 # Method to convert to milliseconds, then apply the time offset, then convert back to SRT timecode.
-def modifyTime(time, offset, beginDelayEffect):
+def modifyTime(time, offset, startTime):
 	time = convertToMilliseconds(time)
-	if convertToMilliseconds(beginDelayEffect) < time:
+	if convertToMilliseconds(startTime) < time:
 		time = time + offset
 	time = convertToSRTTimeCode(time)
 	return time
 
 # Method to modify the lines from the input file. Called for every line with SRT timecode.
-def modifyLine(line, offset, beginDelayEffect):
+def modifyLine(line, offset, startTime):
 	# The starting time for this subtitle text
 	start = line[0:12]
 	# The ending time for this subtitle text
 	end = line[-13:]
 	
 	# Call the method to change the time for the start and end times
-	start = modifyTime(start, offset, beginDelayEffect)
-	end = modifyTime(end, offset, beginDelayEffect)
+	start = modifyTime(start, offset, startTime)
+	end = modifyTime(end, offset, startTime)
 	
 	# Return the full string, with both the start and end times, in the correct format
 	return start + " --> " + end + "\n"
@@ -80,25 +80,25 @@ def modifyLine(line, offset, beginDelayEffect):
 def main():
 	parser = argparse.ArgumentParser(description="\
 	------------------------------------------------------------------------------\n \
-	 -------------------------- SRT Subtitle Fixer v0.5 ---------------------------\n \
+	 ------------------------- SRT Subtitle Fixer v0.5.1 --------------------------\n \
 	------------------------------------------------------------------------------\n \
 	 -- Alter the timing of an SRT subtitle file. ---------------------------------\n \
-	 -- Example: subtitleFixer.py C:\\Input.srt C:\\Output.srt \n\
+	 -- Example: SRT_Subtitle_Fixer.py C:\\Input.srt C:\\Output.srt \n\
 	00:00:05,000 -5000 \
 	------------------------------------------------------------------------------")
 	parser.add_argument('inputPath', metavar='inputPath', default=None, help='Input file path')
 	parser.add_argument('outputPath', metavar='outputPath', default=None, help='Output file path')
-	parser.add_argument('beginDelayEffect', default='00:00:00,000', help='When to begin applying the offset to the srt timecodes. Default is 00:00:00,000')
-	parser.add_argument('offsetInput', help='How much, in milliseconds, to offset the timing in the srt file. Positive, or negative.')
+	parser.add_argument('startTime', default='00:00:00,000', help='When to begin applying the offset to the srt timecodes. Default is 00:00:00,000')
+	parser.add_argument('delayTime', help='How much time, in milliseconds, to offset the timing in the srt file. Positive, or negative.')
 	parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output. Prints every change in SRT timecode.')
 	args = parser.parse_args()
 	inputPath = args.inputPath
 	outputPath = args.outputPath
-	beginDelayEffect = args.beginDelayEffect
-	offset = int(args.offsetInput)
+	startTime = args.startTime
+	offset = int(args.delayTime)
 	
-	if beginDelayEffect == '0':
-		beginDelayEffect = '00:00:00,000'
+	if startTime == '0':
+		startTime = '00:00:00,000'
 	
 	print "\nDelaying subtitles " + inputPath + " by " + str(offset) + " milliseconds, and writing to file " + outputPath
 	
@@ -111,7 +111,7 @@ def main():
 		if len(line) == 30:
 			if line[2] == ':' and line[5] == ':' and line[8] == ',':
 				# Call the method to modify this line to the new time, then write to the output file
-				modifiedLine = modifyLine(line, offset, beginDelayEffect)
+				modifiedLine = modifyLine(line, offset, startTime)
 				# Check for the verbose option
 				if args.verbose:
 					print "Changing " + line + " to      " + modifiedLine
