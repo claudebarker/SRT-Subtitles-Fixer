@@ -9,7 +9,7 @@ an offset (positive or negative delay) to the timing of every subtitle.
 
 SRT Timecode is in the format "00:00:00,000" which translates to "hours:minutes:seconds,milliseconds"
 
-
+|
 
 Command line argument formatting: SRT_Subtitle_Fixer.py inputPath outputPath delayTime
 
@@ -19,7 +19,7 @@ outputPath: The file path for the fixed .srt subtitles file.
 
 delaytime: The amount of time, in milliseconds, to delay the subtitle timings in the input file. Positive numbers delay, negative numbers hasten. i.e. 5000 makes the subtitles appear 5 seconds later, while -5000 makes them appear 5 seconds sooner.
 
-
+|
 
 Options include:
 
@@ -31,7 +31,7 @@ Options include:
 
 -i Insert a new subtitle at any given time in 00:00:00,000 format.
 
-
+|
 
 Complete example: SRT_Subtitle_Fixer.py C:\Input.srt C:\Output.srt -5000 -v -s 00:05:00,000 -i 00:25:00,000
 
