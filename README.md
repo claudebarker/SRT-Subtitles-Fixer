@@ -27,7 +27,7 @@ delaytime: The amount of time, in milliseconds, to delay the subtitle timings in
 
 -v    Verbose output. Shows every change made to the original timing.
 
--s    Start time. When to begin applying the offset to the srt timecodes. Default is 00:00:00,000
+-s    Start time. When to begin applying the delay to the srt timecodes. Default is 00:00:00,000
 
 -i    Insert a new subtitle at any given time in 00:00:00,000 format.
 
