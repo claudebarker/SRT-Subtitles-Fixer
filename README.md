@@ -35,4 +35,4 @@ delaytime: The amount of time, in milliseconds, to delay the subtitle timings in
 
 <b>Complete example:</b> SRT_Subtitle_Fixer.py C:\Input.srt C:\Output.srt -5000 -v -s 00:05:00,000 -i 00:25:00,000
 
-This example reads the file "C:\Input.srt" and writes to file "C:\Output.srt". "-5000" speeds up the subtitles by 5 seconds (-5000 milliseconds delay). "-v" prints the verbose output. "-s 00:05:00,000" tells the script to only delay the subtitles that occur after 5 minutes. "-i 00:25:00,000" inserts a new blank, zero length subtitle at the 25 minute mark.
+This example reads the file "C:\Input.srt" and writes to file "C:\Output.srt". "-5000" speeds up the subtitles by 5 seconds (-5000 milliseconds delay). "-v" prints the verbose output. "-s 00:05:00,000" tells the script to only delay the subtitles that occur after 5 minutes. "-i 00:25:00,000" inserts a new, blank, zero length subtitle at the 25 minute mark.
