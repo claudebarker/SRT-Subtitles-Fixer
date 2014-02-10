@@ -1,7 +1,7 @@
 SRT-Subtitles-Fixer
 ===================
 
-Written in python 2.7.6 by Megalon
+<b>Written in python 2.7.6 by Megalon</b>
 
 This is a simple command line program to delay or speed up the timing of a ".srt" subtitle file.
 It reads all of the lines of the SRT file as a text document, parses the SRT timecode data, and applies
@@ -11,7 +11,7 @@ SRT Timecode is in the format "00:00:00,000" which translates to "hours:minutes:
 
 |
 
-<b>Command line argument formatting</b>: SRT_Subtitle_Fixer.py inputPath outputPath delayTime
+<b>Command line argument formatting:</b> SRT_Subtitle_Fixer.py inputPath outputPath delayTime
 
 inputPath: The file path for the initial .srt subtitles file.
 
@@ -21,7 +21,7 @@ delaytime: The amount of time, in milliseconds, to delay the subtitle timings in
 
 |
 
-Options include:
+<b>Options include:</b>
 
 -h Help. Displays all arguments and options.
 
@@ -33,6 +33,6 @@ Options include:
 
 |
 
-Complete example: SRT_Subtitle_Fixer.py C:\Input.srt C:\Output.srt -5000 -v -s 00:05:00,000 -i 00:25:00,000
+<b>Complete example:</b> SRT_Subtitle_Fixer.py C:\Input.srt C:\Output.srt -5000 -v -s 00:05:00,000 -i 00:25:00,000
 
 This example reads the file "C:\Input.srt" and writes to file "C:\Output.srt". "-5000" speeds up the subtitles by 5 seconds (-5000 milliseconds delay). "-v" prints the verbose output. "-s 00:05:00,000" tells the script to delay the subtitles that occur after 5 minutes. "-i 00:25:00,000" inserts a new blank, zero length subtitle at the 25 minute mark.
