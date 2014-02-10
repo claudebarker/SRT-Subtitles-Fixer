@@ -11,7 +11,7 @@ SRT Timecode is in the format "00:00:00,000" which translates to "hours:minutes:
 
 |
 
-Command line argument formatting: SRT_Subtitle_Fixer.py inputPath outputPath delayTime
+<b>Command line argument formatting</b>: SRT_Subtitle_Fixer.py inputPath outputPath delayTime
 
 inputPath: The file path for the initial .srt subtitles file.
 
